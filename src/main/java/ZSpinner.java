@@ -65,7 +65,7 @@ public class ZSpinner extends JPanel implements ChangeListener {
     public void stateChanged(ChangeEvent e) {
         System.out.println("---");
     }
-
+    //
     class Action extends AbstractAction{
 
         public void actionPerformed(ActionEvent e) {
