@@ -16,7 +16,7 @@ public class SpinnerNumberSample {
         panel1.add(spinner1, BorderLayout.CENTER);
         frame.add(panel1, BorderLayout.SOUTH);
 //-----------------------------------------------------
-        SpinnerModel model = new SpinnerNumberModel(500,0,null,100);
+        SpinnerNumberModel model = new SpinnerNumberModel(0,0,null,1000);
         ZSpinner spinner = new ZSpinner(model);
         frame.add(spinner, BorderLayout.NORTH);
 //-----------------------------------------------------
