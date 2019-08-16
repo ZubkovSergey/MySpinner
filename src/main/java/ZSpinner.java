@@ -3,11 +3,19 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.Serializable;
 
 import static com.sun.javafx.fxml.expression.Expression.add;
 
 public class ZSpinner extends JPanel implements ChangeListener {
-    SpinnerModel model = null;
+
+    private JComponent editor;
+    private ChangeListener modelListener;
+    private transient ChangeEvent changeEvent;
+    private boolean editorExplicitlySet = false;
+
+
+    private SpinnerModel model = null;
     JTextField editField;
     JButton bLeft;
     JButton bRight;
@@ -62,6 +70,27 @@ public class ZSpinner extends JPanel implements ChangeListener {
 
         public void actionPerformed(ActionEvent e) {
             System.out.println("dddd");
+        }
+    }
+
+
+
+
+    private class ModelListener implements ChangeListener, Serializable {
+        public void stateChanged(ChangeEvent e) {
+            fireStateChanged();
+        }
+    }
+
+    protected void fireStateChanged() {
+        Object[] listeners = listenerList.getListenerList();
+        for (int i = listeners.length - 2; i >= 0; i -= 2) {
+            if (listeners[i] == ChangeListener.class) {
+                if (changeEvent == null) {
+                    changeEvent = new ChangeEvent(this);
+                }
+                ((ChangeListener)listeners[i+1]).stateChanged(changeEvent);
+            }
         }
     }
 
