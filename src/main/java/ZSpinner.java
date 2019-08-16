@@ -75,6 +75,7 @@ public class ZSpinner extends JPanel implements ChangeListener {
 //                ia.printStackTrace();
             }
         }
+
     }
 
     class PreviousPage extends AbstractAction{
